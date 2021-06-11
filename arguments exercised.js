@@ -43,5 +43,29 @@ function curriedSum(numArgs) {
 }
 
 Function.prototype.curry = function(numArgs){
-    
+    const args = [];
+    const that = this;
+    function _curry(arg) {
+        args.push(arg);
+        if(args.length === numArgs) {
+            return that(...args);
+        } else {
+            return _curry;
+        }
+    }
+    return _curry;
+}
+
+Function.prototype.curry2 = function(numArgs){
+    const args = [];
+    const that = this;
+    function _curry(arg) {
+        args.push(arg);
+        if(args.length === numArgs) {
+            return that.apply(null, args);
+        } else {
+            return _curry;
+        }
+    }
+    return _curry;
 }
