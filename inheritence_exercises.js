@@ -1,13 +1,13 @@
-function Surrogate() {};
-Surrogate.prototype = Superclass.prototype;
-Subclass.prototype = new Surrogate();
-Subclass.prototype.constructor =  Subclass;
+// function Surrogate() {};
+// Surrogate.prototype = Superclass.prototype;
+// Subclass.prototype = new Surrogate();
+// Subclass.prototype.constructor =  Subclass;
 
-Function.prototype.inherits = (parent, child) {
+Function.prototype.inherits = function (parent) {
     function Surrogate () {};
     Surrogate.prototype = parent.prototype;
-    child.prototype = new Surrogate();
-    child.prototype.constructor = child;
+    this.prototype = new Surrogate();
+    this.prototype.constructor = this;
 };
 
 function MovingObject (speed) {
