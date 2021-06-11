@@ -1,18 +1,18 @@
-function sum() {
-    let resultSum = 0;
-    for (let i = 0; i < arguments.length; i++) {
-        resultSum += arguments[i];
-    }
-    return resultSum;
-}
+// function sum() {
+//     let resultSum = 0;
+//     for (let i = 0; i < arguments.length; i++) {
+//         resultSum += arguments[i];
+//     }
+//     return resultSum;
+// }
 
-function sum2(...args) {
-    let resultSum = 0;
-    for (let i = 0; i < args.length; i++) {
-        resultSum += args[i];
-    }
-    return resultSum;
-}
+// function sum2(...args) {
+//     let resultSum = 0;
+//     for (let i = 0; i < args.length; i++) {
+//         resultSum += args[i];
+//     }
+//     return resultSum;
+// }
 
 Function.prototype.myBind = function(context) { 
     const that = this; // this refers to the function that you're calling myBind on
@@ -25,4 +25,23 @@ Function.prototype.myBind = function(context) {
 
 Function.prototype.myBind2 = function(context, ...bindArgs) {
     return (...callArgs) => this.apply(context, bindArgs.concat(callArgs));
+}
+
+function curriedSum(numArgs) {
+    let numbers = [];
+    function _curriedSum(num) {
+        numbers.push(num);
+        let resultSum = 0;
+        if (numbers.length === numArgs){
+            numbers.forEach((ele) => resultSum += ele);
+            return resultSum;
+        } else {
+            return _curriedSum;
+        }
+    }
+    return _curriedSum;
+}
+
+Function.prototype.curry = function(numArgs){
+    
 }
